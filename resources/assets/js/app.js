@@ -8,13 +8,19 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform';
 
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+window.Form = Form;
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 let routes = [
     {path: '/dashboard', component: require('./components/Dashboard.vue')},
-    {path: '/profile', component: require('./components/Profile.vue')}
+    {path: '/profile', component: require('./components/Profile.vue')},
+    {path: '/user', component: require('./components/User.vue')}
 ]
 
 const router = new VueRouter({
