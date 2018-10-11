@@ -108,18 +108,33 @@
                 editmode:false,
                 users: {},
                 form: new Form({
-                name: '',
-                email: '',
-                password: '',
-                type: '',
-                bio: '',
-                photo: ''
+                    id: '',
+                    name: '',
+                    email: '',
+                    password: '',
+                    type: '',
+                    bio: '',
+                    photo: ''
                 })
             }
         },
         methods: {
             updateUser(){
-                console.log('edit');
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                .then(()=> {
+                     $('#addNew').modal('hide');
+                    swal(
+                        'Updated!',
+                        'Your User has been Updated.',
+                        'success'
+                        )
+                    this.$Progress.finish();
+                    Fire.$emit('AfterCreate')
+                })
+                .catch(()=>{
+                    this.$Progress.fail();
+                });
             },
             editModal(user){
                 this.editmode = true;
