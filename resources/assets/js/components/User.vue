@@ -26,8 +26,8 @@
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.type}}</td>
-                    <td>{{user.created_at}}</td>
+                    <td>{{user.type | upText}}</td>
+                    <td>{{user.created_at | myDate}}</td>
                     <td>
                         <a href="#">Edit
                             <i class="fas fa-edit green fa-fw"></i>
@@ -119,7 +119,14 @@
                 axios.get("api/user").then(({ data }) => (this.users = data.data));
             },
             createUser() {
+                this.$Progress.start();
                 this.form.post('api/user');
+                $('#addNew').modal('hide')
+                toast({
+                    type: 'success',
+                    title: 'User Created in successfully'
+                    }); 
+                this.$Progress.finish();
             }
         },
         created() {
