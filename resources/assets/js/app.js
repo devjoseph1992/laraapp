@@ -15,6 +15,11 @@ import { Form, HasError, AlertError } from 'vform';
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
+
+
 import swal from 'sweetalert2'
 window.swal = swal;
 
@@ -42,7 +47,7 @@ Vue.use(VueProgressBar, {
 let routes = [
     {path: '/dashboard', component: require('./components/Dashboard.vue')},
     {path: '/profile', component: require('./components/Profile.vue')},
-    {path: '/user', component: require('./components/User.vue')}
+    {path: '/users', component: require('./components/User.vue')}
 ]
 
 const router = new VueRouter({
@@ -67,7 +72,11 @@ Vue.filter('myDate', function(created) {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+Vue.component('not-found', require('./components/NotFound.vue'));
+
 
 const app = new Vue({
     el: '#app',
